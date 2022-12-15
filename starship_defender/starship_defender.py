@@ -13,6 +13,8 @@ class StarshipDefender:
 
         self.screen = pygame.display.set_mode((1600, 900))
         pygame.display.set_caption("Starship Defender")
+        # set background color
+        self.bg_color = (200, 240, 230)
 
     def run_game(self):
         """Start the game"""
@@ -21,8 +23,11 @@ class StarshipDefender:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                # display the last screen
-                pygame.display.flip()
+            # redraw display every iteration
+            self.screen.fill(self.bg_color)
+
+            # display the last screen
+            pygame.display.flip()
 
 
 if __name__ == '__main__':
