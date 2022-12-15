@@ -3,6 +3,8 @@ import sys
 
 import pygame
 
+from settings import Settings
+
 
 class StarshipDefender:
     """General class to manage resources and game behavior."""
@@ -10,8 +12,10 @@ class StarshipDefender:
     def __init__(self):
         """Initializing the game and create game resources."""
         pygame.init()
+        self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((1600, 900))
+        self.screen = pygame.display.set_mode(
+            (self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Starship Defender")
         # set background color
         self.bg_color = (200, 240, 230)
@@ -24,7 +28,7 @@ class StarshipDefender:
                 if event.type == pygame.QUIT:
                     sys.exit()
             # redraw display every iteration
-            self.screen.fill(self.bg_color)
+            self.screen.fill(self.settings.bg_color)
 
             # display the last screen
             pygame.display.flip()
