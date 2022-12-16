@@ -4,6 +4,7 @@ import sys
 import pygame
 
 from settings import Settings
+from ship import Ship
 
 
 class StarshipDefender:
@@ -17,8 +18,8 @@ class StarshipDefender:
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Starship Defender")
-        # set background color
-        self.bg_color = (200, 240, 230)
+
+        self.ship = Ship(self)
 
     def run_game(self):
         """Start the game"""
@@ -29,6 +30,7 @@ class StarshipDefender:
                     sys.exit()
             # redraw display every iteration
             self.screen.fill(self.settings.bg_color)
+            self.ship.blitme()
 
             # display the last screen
             pygame.display.flip()
