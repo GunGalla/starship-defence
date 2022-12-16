@@ -8,13 +8,18 @@ class Ship:
     def __init__(self, sd_game):
         """Initializing the ship"""
         self.screen = sd_game.screen
+        self.settings = sd_game.settings
         self.screen_rect = sd_game.screen.get_rect()
 
         # Uploading ship image
         self.image = pygame.image.load('images/starship.bmp')
         self.rect = self.image.get_rect()
-        # New ship appears at the middle bottom of the screen
+
+        # Ship location on the screen
         self.rect.midbottom = self.screen_rect.midbottom
+
+        # Ship coordinates
+        self.x = float(self.rect.x)
 
         # Moving trigger
         self.moving_right = False
@@ -23,9 +28,11 @@ class Ship:
     def update(self):
         """Renew ship position"""
         if self.moving_right:
-            self.rect.x += 1
+            self.x += self.settings.ship_speed
         if self.moving_left:
-            self.rect.x -= 1
+            self.x -= self.settings.ship_speed
+
+        self.rect.x = self.x
 
     def blitme(self):
         """Draw current ship position"""
