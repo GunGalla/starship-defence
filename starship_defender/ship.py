@@ -16,6 +16,17 @@ class Ship:
         # New ship appears at the middle bottom of the screen
         self.rect.midbottom = self.screen_rect.midbottom
 
+        # Moving trigger
+        self.moving_right = False
+        self.moving_left = False
+
+    def update(self):
+        """Renew ship position"""
+        if self.moving_right:
+            self.rect.x += 1
+        if self.moving_left:
+            self.rect.x -= 1
+
     def blitme(self):
         """Draw current ship position"""
         self.screen.blit(self.image, self.rect)
