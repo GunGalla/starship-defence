@@ -24,16 +24,27 @@ class StarshipDefender:
     def run_game(self):
         """Start the game"""
         while True:
-            # Tracking mouse and keyboard events
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            # redraw display every iteration
-            self.screen.fill(self.settings.bg_color)
-            self.ship.blitme()
+            self._check_events()
+            self._update_screen()
 
-            # display the last screen
-            pygame.display.flip()
+    def _check_events(self):
+        # Tracking mouse and keyboard events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.rect.x += 5
+                elif event.key == pygame.K_LEFT:
+                    self.ship.rect.x -= 5
+
+    def _update_screen(self):
+        # redraw display every iteration
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+
+        # display the last screen
+        pygame.display.flip()
 
 
 if __name__ == '__main__':

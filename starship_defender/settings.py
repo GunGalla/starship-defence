@@ -9,4 +9,4 @@ class Settings:
         # Display parameters
         self.screen_width = 1600
         self.screen_height = 900
-        self.bg_color = (200, 240, 230)
+        self.bg_color = (59, 68, 75)
