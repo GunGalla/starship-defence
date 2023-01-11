@@ -69,8 +69,9 @@ class StarshipDefender:
 
     def _fire_bullet(self):
         """Creates new bullet and include it in bullets group."""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
     def _update_screen(self):
         """Renew screen to show changes."""
