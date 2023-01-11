@@ -1,4 +1,4 @@
-"""Game's core engine"""
+"""Game's core engine."""
 import sys
 
 import pygame
@@ -6,6 +6,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 
 class StarshipDefender:
@@ -22,9 +23,12 @@ class StarshipDefender:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
     def run_game(self):
-        """Start the game"""
+        """Start the game."""
         while True:
             self._check_events()
             self.ship.update()
@@ -78,6 +82,12 @@ class StarshipDefender:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+    def _create_fleet(self):
+        """Create invasion fleet."""
+        # Alien creation
+        alien = Alien(self)
+        self.aliens.add(alien)
+
     def _update_screen(self):
         """Renew screen to show changes."""
         # redraw display every iteration
@@ -85,6 +95,7 @@ class StarshipDefender:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
 
         # display the last screen
         pygame.display.flip()

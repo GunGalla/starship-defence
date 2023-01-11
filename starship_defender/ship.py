@@ -1,12 +1,12 @@
-"""Ship control module"""
+"""Ship control module."""
 import pygame
 
 
 class Ship:
-    """Class to describe ship"""
+    """Class to describe ship."""
 
     def __init__(self, sd_game):
-        """Initializing the ship"""
+        """Initializing the ship."""
         self.screen = sd_game.screen
         self.settings = sd_game.settings
         self.screen_rect = sd_game.screen.get_rect()
@@ -26,7 +26,7 @@ class Ship:
         self.moving_left = False
 
     def update(self):
-        """Renew ship position"""
+        """Renew ship position."""
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.x += self.settings.ship_speed
         if self.moving_left and self.rect.left > 0:
@@ -35,5 +35,5 @@ class Ship:
         self.rect.x = self.x
 
     def blitme(self):
-        """Draw current ship position"""
+        """Draw current ship position."""
         self.screen.blit(self.image, self.rect)
