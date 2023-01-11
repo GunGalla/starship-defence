@@ -31,6 +31,11 @@ class StarshipDefender:
             self.bullets.update()
             self._update_screen()
 
+            # Bullets deletion
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
+
     def _check_events(self):
         """Checking any events through game."""
         # Tracking mouse and keyboard events
