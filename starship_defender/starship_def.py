@@ -82,16 +82,24 @@ class StarshipDefender:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
+        self._check_bullet_alien_collisions()
+
+    def _check_bullet_alien_collisions(self):
+        """Register collisions between aliens and bullets. Create new fleet."""
         # Collisions between aliens and bullets
         pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
+        # Remove bullets and create new fleet
         if not self.aliens:
-            # Remove bullets and create new fleet
             self.bullets.empty()
             self._create_fleet()
 
     def _update_aliens(self):
-        """Renew aliens position and change direction is fleet reach the edge of the screem."""
+        """
+        Renew aliens position and change direction
+        is fleet reach the edge of the screem.
+        """
         self._check_fleet_edges()
         self.aliens.update()
 
