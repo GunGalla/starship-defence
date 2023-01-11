@@ -28,13 +28,8 @@ class StarshipDefender:
         while True:
             self._check_events()
             self.ship.update()
-            self.bullets.update()
+            self._update_bullets()
             self._update_screen()
-
-            # Bullets deletion
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
 
     def _check_events(self):
         """Checking any events through game."""
@@ -72,6 +67,16 @@ class StarshipDefender:
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """Renew bullet position and delete them, when needed."""
+        # Bullet position renew
+        self.bullets.update()
+
+        # Bullets deletion
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
 
     def _update_screen(self):
         """Renew screen to show changes."""
