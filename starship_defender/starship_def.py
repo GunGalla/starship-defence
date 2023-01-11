@@ -33,6 +33,7 @@ class StarshipDefender:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
 
     def _check_events(self):
@@ -81,6 +82,10 @@ class StarshipDefender:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
+    def _update_aliens(self):
+        """Renew aliens position."""
+        self.aliens.update()
 
     def _create_fleet(self):
         """Create invasion fleet."""

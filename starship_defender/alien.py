@@ -9,6 +9,7 @@ class Alien(Sprite):
         """Initialize alien and gave him a position."""
         super().__init__()
         self.screen = sd_game.screen
+        self.settings = sd_game.settings
 
         # Alien image load and set rect attribute
         self.image = pygame.image.load('images/alien.bmp')
@@ -20,3 +21,8 @@ class Alien(Sprite):
 
         # Alien float type coordinates
         self.x = float(self.rect.x)
+
+    def update(self):
+        """Move aliens to the right"""
+        self.x += self.settings.alien_speed
+        self.rect.x = self.x
