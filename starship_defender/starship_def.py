@@ -87,7 +87,7 @@ class StarshipDefender:
 
     def _check_bullet_alien_collisions(self):
         """Register collisions between aliens and bullets. Create new fleet."""
-        # Collisions between aliens and bullets
+        # Collisions between   aliens and bullets
         pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
         # Remove bullets and create new fleet
