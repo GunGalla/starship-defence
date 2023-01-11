@@ -82,8 +82,13 @@ class StarshipDefender:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
-        # collisions between aliens and bullets
+        # Collisions between aliens and bullets
         pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
+        if not self.aliens:
+            # Remove bullets and create new fleet
+            self.bullets.empty()
+            self._create_fleet()
 
     def _update_aliens(self):
         """Renew aliens position and change direction is fleet reach the edge of the screem."""
@@ -133,18 +138,18 @@ class StarshipDefender:
 
     def _update_screen(self):
         """Renew screen to show changes."""
-        # redraw display every iteration
+        # Redraw display every iteration
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
 
-        # display the last screen
+        # Display the last screen
         pygame.display.flip()
 
 
 if __name__ == '__main__':
-    # creating class object and game start
+    # Creating class object and game start
     sd = StarshipDefender()
     sd.run_game()
