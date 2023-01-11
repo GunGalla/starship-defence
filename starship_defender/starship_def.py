@@ -84,9 +84,18 @@ class StarshipDefender:
 
     def _create_fleet(self):
         """Create invasion fleet."""
-        # Alien creation
+        # Alien fleet creation
         alien = Alien(self)
-        self.aliens.add(alien)
+        alien_width = alien.rect.width
+        available_space_x = self.settings.screen_width - (2 * alien_width)
+        number_aliens_x = int(available_space_x // (1.5 * alien_width))
+
+        # First row of aliens creation
+        for alien_number in range(number_aliens_x):
+            alien = Alien(self)
+            alien.x = alien_width + 1.5 * alien_width * alien_number
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
 
     def _update_screen(self):
         """Renew screen to show changes."""
