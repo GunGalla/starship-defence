@@ -1,5 +1,6 @@
 """Game's core engine."""
 import sys
+from time import sleep
 
 import pygame
 
@@ -7,6 +8,7 @@ from settings import Settings
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+from game_stats import GameStats
 
 
 class StarshipDefender:
@@ -17,10 +19,16 @@ class StarshipDefender:
         pygame.init()
         self.settings = Settings()
 
+        # Screen resolution
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
+        # Game name in the title
         pygame.display.set_caption("Starship Defender")
 
+        # Stat object creations
+        self.stats = GameStats(self)
+
+        # Ship, aliens and bullets creation
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
@@ -95,6 +103,22 @@ class StarshipDefender:
             self.bullets.empty()
             self._create_fleet()
 
+    def _ship_hit(self):
+        """Processing ship-alien collision."""
+        # Ship destroyed
+        self.stats.ships_left -= 1
+
+        # Aliens and bullets remove
+        self.aliens.empty()
+        self.bullets.empty()
+
+        # New fleet creation and ship respawn
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # Pause
+        sleep(0.5)
+
     def _update_aliens(self):
         """
         Renew aliens position and change direction
@@ -105,7 +129,7 @@ class StarshipDefender:
 
         # Check if ship and alien collide
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("Ship hit!!!")
+            self._ship_hit()
 
     def _create_fleet(self):
         """Create invasion fleet."""
