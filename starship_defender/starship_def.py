@@ -80,6 +80,7 @@ class StarshipDefender:
             # Game stats reset
             self.stats.reset_stats()
             self.stats.game_active = True
+            self.sb.prep_score()
 
             # Aliens and bullets remove
             self.aliens.empty()
@@ -131,8 +132,10 @@ class StarshipDefender:
     def _check_bullet_alien_collisions(self):
         """Register collisions between aliens and bullets. Create new fleet."""
         # Collisions between   aliens and bullets
-        if pygame.sprite.groupcollide(self.bullets, self.aliens, True, True):
-            self.stats.score += self.settings.alien_points
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        if collisions:
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
 
         # Remove bullets and create new fleet

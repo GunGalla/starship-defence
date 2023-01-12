@@ -25,7 +25,8 @@ class Settings:
 
         # Next level difficulty upgrade settings
         self.speedup_scale = 1.1
-        self.bullet_size_scale = 1.2
+        self.bullet_size_scale = 1.15
+        self.score_scale = 1.5
 
         self.initialize_dynamic_settings()
 
@@ -33,7 +34,7 @@ class Settings:
         """Set settings, which changes through game."""
         self.ship_speed_factor = 1.5
         self.bullet_speed_factor = 3.0
-        self.alien_speed_factor = 1.0
+        self.alien_speed_factor = 0.8
         self.bullet_width = 10
 
         # fleet_direction = 1 means move right, (-1) means left
@@ -49,5 +50,6 @@ class Settings:
         self.bullet_speed_factor *= speed_up
         self.alien_speed_factor *= speed_up
         self.bullet_width *= self.bullet_size_scale
+        self.alien_points = int(self.alien_points * self.score_scale)
 
 
