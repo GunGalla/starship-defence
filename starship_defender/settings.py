@@ -39,6 +39,9 @@ class Settings:
         # fleet_direction = 1 means move right, (-1) means left
         self.fleet_direction = 1
 
+        # Score counting
+        self.alien_points = 10
+
     def increase_speed(self):
         """Level up speed settings and bullet width."""
         speed_up = self.speedup_scale

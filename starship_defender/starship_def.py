@@ -131,7 +131,9 @@ class StarshipDefender:
     def _check_bullet_alien_collisions(self):
         """Register collisions between aliens and bullets. Create new fleet."""
         # Collisions between   aliens and bullets
-        pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        if pygame.sprite.groupcollide(self.bullets, self.aliens, True, True):
+            self.stats.score += self.settings.alien_points
+            self.sb.prep_score()
 
         # Remove bullets and create new fleet
         if not self.aliens:
