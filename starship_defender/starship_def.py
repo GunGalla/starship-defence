@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Game's core engine."""
 import sys
 from time import sleep
