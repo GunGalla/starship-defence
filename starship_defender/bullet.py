@@ -23,7 +23,7 @@ class Bullet(Sprite):
     def update(self):
         """Imitates bullet moving."""
         # Renew bullet position in float type
-        self.y -= self.settings.bullet_speed
+        self.y -= self.settings.bullet_speed_factor
         # Renew bullet position
         self.rect.y = self.y
 
