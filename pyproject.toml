@@ -10,6 +10,8 @@ packages = [{include = "starship_defender"}]
 python = "^3.10"
 pygame = "^2.1.2"
 
+[tool.poetry.scripts]
+starship-def = "starship_defender.starship_def:main"
 
 [build-system]
 requires = ["poetry-core"]
