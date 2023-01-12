@@ -39,9 +39,12 @@ class StarshipDefender:
         """Start the game."""
         while True:
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+
+            if self.stats.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
+
             self._update_screen()
 
     def _check_events(self):
@@ -105,19 +108,22 @@ class StarshipDefender:
 
     def _ship_hit(self):
         """Processing ship-alien collision."""
-        # Ship destroyed
-        self.stats.ships_left -= 1
+        if self.stats.ships_left > 0:
+            # Ship destroyed
+            self.stats.ships_left -= 1
 
-        # Aliens and bullets remove
-        self.aliens.empty()
-        self.bullets.empty()
+            # Aliens and bullets remove
+            self.aliens.empty()
+            self.bullets.empty()
 
-        # New fleet creation and ship respawn
-        self._create_fleet()
-        self.ship.center_ship()
+            # New fleet creation and ship respawn
+            self._create_fleet()
+            self.ship.center_ship()
 
-        # Pause
-        sleep(0.5)
+            # Pause
+            sleep(0.5)
+        else:
+            self.stats.game_active = False
 
     def _update_aliens(self):
         """
