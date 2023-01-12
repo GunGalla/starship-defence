@@ -17,6 +17,7 @@ class Scoreboard:
         # Prepare image scores
         self.prep_score()
         self.prep_high_score()
+        self.prep_level()
 
     def prep_score(self):
         """Transfer current score to image."""
@@ -46,9 +47,21 @@ class Scoreboard:
         """Draw score on the screen."""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
+        self.screen.blit(self.level_image, self.level_rect)
 
     def check_high_score(self):
         """Renew high score."""
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
             self.prep_high_score()
+
+    def prep_level(self):
+        """Transfer current level to image"""
+        level_str = f"Level: {str(self.stats.level)}"
+        self.level_image = self.font.render(level_str, True,
+                self.text_color, self.settings.bg_color)
+
+        # Display level under current score
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.right = self.score_rect.right
+        self.level_rect.top = self.score_rect.bottom + 10

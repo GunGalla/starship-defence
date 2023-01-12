@@ -81,14 +81,9 @@ class StarshipDefender:
             self.stats.reset_stats()
             self.stats.game_active = True
             self.sb.prep_score()
+            self.sb.prep_level()
 
-            # Aliens and bullets remove
-            self.aliens.empty()
-            self.bullets.empty()
-
-            # New fleet creation and ship respawn
-            self._create_fleet()
-            self.ship.center_ship()
+            self._clear_and_restart()
 
             # Hide mouse cursor
             pygame.mouse.set_visible(False)
@@ -144,24 +139,21 @@ class StarshipDefender:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+            # Level increase
+            self.stats.level += 1
+            self.sb.prep_level()
 
     def _ship_hit(self):
         """Processing ship-alien collision."""
         if self.stats.ships_left > 0:
             # Ship destroyed
             self.stats.ships_left -= 1
-
-            # Aliens and bullets remove
-            self.aliens.empty()
-            self.bullets.empty()
-
-            # New fleet creation and ship respawn
-            self._create_fleet()
-            self.ship.center_ship()
+            self._clear_and_restart()
 
             # Pause
             sleep(0.5)
         else:
+            self._clear_and_restart()
             self.stats.game_active = False
             pygame.mouse.set_visible(True)
 
@@ -229,6 +221,16 @@ class StarshipDefender:
                 # Same reaction as ship hit
                 self._ship_hit()
                 break
+
+    def _clear_and_restart(self):
+        """Clear the screen and return objects to start point."""
+        # Aliens and bullets remove
+        self.aliens.empty()
+        self.bullets.empty()
+
+        # New fleet creation and ship respawn
+        self._create_fleet()
+        self.ship.center_ship()
 
     def _update_screen(self):
         """Renew screen to show changes."""
