@@ -10,6 +10,7 @@ from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
 from button import Button
+from scoreboard import Scoreboard
 
 
 class StarshipDefender:
@@ -26,8 +27,9 @@ class StarshipDefender:
         # Game name in the title
         pygame.display.set_caption("Starship Defender")
 
-        # Stat object creations
+        # Stat and score object creations
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         # Ship, aliens and bullets creation
         self.ship = Ship(self)
@@ -230,6 +232,9 @@ class StarshipDefender:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
+
+        # Show score
+        self.sb.show_score()
 
         # 'Play' button works if game is inactive
         if not self.stats.game_active:
