@@ -71,7 +71,17 @@ class StarshipDefender:
     def _check_play_button(self, mouse_pos):
         """Start the game if mouse click on the button."""
         if self.play_button.rect.collidepoint(mouse_pos):
+            # Game stats reset
+            self.stats.reset_stats()
             self.stats.game_active = True
+
+            # Aliens and bullets remove
+            self.aliens.empty()
+            self.bullets.empty()
+
+            # New fleet creation and ship respawn
+            self._create_fleet()
+            self.ship.center_ship()
 
     def _check_keydown_events(self, event):
         """Check if any key pressed."""
