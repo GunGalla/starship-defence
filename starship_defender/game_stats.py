@@ -8,8 +8,8 @@ class GameStats:
         self.settings = sd_game.settings
         self.reset_stats()
 
-        # Defines if game active or not
-        self.game_active = True
+        # Game starts inactive
+        self.game_active = False
 
     def reset_stats(self):
         """Changing stat through the game."""
