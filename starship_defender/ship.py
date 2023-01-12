@@ -1,12 +1,14 @@
 """Ship control module."""
 import pygame
+from pygame.sprite import Sprite
 
 
-class Ship:
+class Ship(Sprite):
     """Class to describe ship."""
 
     def __init__(self, sd_game):
         """Initializing the ship."""
+        super().__init__()
         self.screen = sd_game.screen
         self.settings = sd_game.settings
         self.screen_rect = sd_game.screen.get_rect()

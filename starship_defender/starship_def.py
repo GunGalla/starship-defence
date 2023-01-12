@@ -82,6 +82,7 @@ class StarshipDefender:
             self.stats.game_active = True
             self.sb.prep_score()
             self.sb.prep_level()
+            self.sb.prep_ships()
 
             self._clear_and_restart()
 
@@ -148,6 +149,7 @@ class StarshipDefender:
         if self.stats.ships_left > 0:
             # Ship destroyed
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
             self._clear_and_restart()
 
             # Pause
