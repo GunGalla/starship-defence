@@ -41,7 +41,7 @@ class Settings:
         self.fleet_direction = 1
 
         # Score counting
-        self.alien_points = 10
+        self.alien_points = 30
 
     def increase_speed(self):
         """Level up speed settings and bullet width."""
