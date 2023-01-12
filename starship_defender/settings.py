@@ -15,7 +15,6 @@ class Settings:
         self.ship_limit = 3
 
         # Bullet settings
-        self.bullet_speed = 2
         self.bullet_width = 10
         self.bullet_height = 15
         self.bullet_color = (255, 69, 0)
@@ -26,6 +25,7 @@ class Settings:
 
         # Next level difficulty upgrade settings
         self.speedup_scale = 1.1
+        self.bullet_size_scale = 1.2
 
         self.initialize_dynamic_settings()
 
@@ -34,15 +34,17 @@ class Settings:
         self.ship_speed_factor = 1.5
         self.bullet_speed_factor = 3.0
         self.alien_speed_factor = 1.0
+        self.bullet_width = 10
 
         # fleet_direction = 1 means move right, (-1) means left
         self.fleet_direction = 1
 
     def increase_speed(self):
-        """Level up speed settings"""
+        """Level up speed settings and bullet width."""
         speed_up = self.speedup_scale
         self.ship_speed_factor *= speed_up
         self.bullet_speed_factor *= speed_up
         self.alien_speed_factor *= speed_up
+        self.bullet_width *= self.bullet_size_scale
 
 

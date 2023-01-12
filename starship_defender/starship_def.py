@@ -72,6 +72,9 @@ class StarshipDefender:
         """Start the game if mouse click on the button."""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
+            # Dynamic settings reset
+            self.settings.initialize_dynamic_settings()
+
             # Game stats reset
             self.stats.reset_stats()
             self.stats.game_active = True
