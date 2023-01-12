@@ -254,8 +254,11 @@ class StarshipDefender:
         # Display the last screen
         pygame.display.flip()
 
-
-if __name__ == '__main__':
+def main():
+    """Start the game."""
     # Creating class object and game start
     sd = StarshipDefender()
     sd.run_game()
+
+if __name__ == '__main__':
+    main()

@@ -13,7 +13,5 @@ package-install:
 start:
 	poetry run starship-def
 
-lint:
-	poetry run flake8 brain_games
 
 .PHONY: install
